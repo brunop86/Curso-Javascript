@@ -27,7 +27,7 @@ function comprar(itemDeCompra) {
     dinero -= itemDeCompra.precio;
     actualizarHTML();
   } else {
-    alert(`No tenés dinero suficiente para comprar ${itemDeCompra.nombre}.`);
+    alert(`No tienes más dinero. Gracias, vuelva prontos!`);
   }
 }
 
