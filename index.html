@@ -3,30 +3,68 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
-    <title>Lista de Compras</title>
+    <link rel="stylesheet" href="styles.css" />
+    <title>Tennis World</title>
   </head>
   <body>
-    <section>
-      <h1>¡Holas! ¿Qué quierés comprar?</h1>
-      <ul>
-        <li onclick="comprar(harina)">Harina <span>$100</span></li>
-        <li onclick="comprar(yerba)">Yerba <span>$150</span></li>
-        <li onclick="comprar(mermelada)">Mermelada <span>$140</span></li>
-        <li onclick="comprar(edulcorante)">Edulcorante <span>$50</span></li>
-        <li onclick="comprar(cafe)">Café <span>$200</span></li>
-        <li onclick="comprar(tonico)">Tónico del Amor <span>$120</span></li>
-      </ul>
+    <header>
+      <nav class="nav">
+              <a href="#">
+                  <h2>TENNIS WORLD</h2>
+              </a>
+          <div class="menu">
+              <ul class="main-menu">
+                  <li><a href="#">Men's Apparel</a></li>
+                  <li><a href="#">Women's Apparel</a></li>
+                  <li><a href="#">Racquets</a></li>
+                  <li><a href="#">Shoes</a></li>
+              </ul>
+          </div>
+          <div class="get-started">
+              <button class="btn-sec-s">Sign In</button>
+              <button class="btn-main-s">Register</button>
+          </div>
+      </nav>
+  </header>
+    <main>
+      <input id="inputBuscar" type="text" placeholder="Search..." />
+      <div>
+        <h2 class="intro-text">
+        New Arrivals!
+        </h2>
+      </div>
+      <div id="productos">
+      </div>
+    </main>
+
+    <section class="ocultar">
+      <h1>
+        <span id="cantidadProductos">0</span>
+      </h1>
+      <div id="scroll">
+        <div id="carrito">
+        </div>
+      </div>
+      <h2>Total: $<span id="totalCarrito">0</span></h2>
     </section>
-    <section>
-      <h2>Mi Carrito</h2>
-      <h2 id="dinero">Dinero: $<span></span></h2>
-      <ul id="inventario">
-      </ul>
-      
-    </section>
+
+    <footer>
+      <div class="container-social-media">
+          <a href="https://www.facebook.com/" target="_blank">
+              <img class="img-logo" src="./img/facebook.svg" alt="logo facebook">
+          </a>
+          <a href="https://www.instagram.com/" target="_blank">
+              <img class="img-logo" src="./img/instagram.svg" alt="logo instagram">
+          </a>
+          <a href="https://twitter.com/" target="_blank">
+              <img class="img-logo" src="./img/twitter.svg" alt="logo twitter">
+          </a>
+      </div>
+      <div class="container-footer">
+          <h5>COPYRIGHT® All Rights Reserved</h5>
+      </div>
+  </footer>
     <script src="app.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
+  
 </html>
