@@ -10,20 +10,56 @@ class Producto {
 
 class BaseDeDatos {
   constructor() {
-    this.productos = [];
-    this.agregarRegistro(1, "Shirt Nike Winter Rafa", 34.99, "Indumentaria", "remera-rafa.webp");
-    this.agregarRegistro(2, "Short Nike Winter Rafa", 79.99, "Indumentaria", "short-rafa.webp");
-    this.agregarRegistro(3, "Dress Adidas Fall Slam Pro Set", 99.99, "Indumentaria", "vestido-adidas.webp");
-    this.agregarRegistro(4, "Dress Nike Fall Night Slam", 109.99, "Indumentaria", "vestido-nike.webp");
-    this.agregarRegistro(5, "Nike Zoom Vapor 9.5 Tour", 169.99, "Calzado", "zapas-nike.webp");
-    this.agregarRegistro(6, "Adidas Barricade Royal", 149.99, "Calzado", "zapas-adidas.webp");
-    this.agregarRegistro(7, "Babolat Pure Aero 98", 279.99, "Raquetas", "pure-aero.webp");
-    this.agregarRegistro(8, "Yonex VCORE Tour 95", 259.99, "Raquetas", "yonex-vcore.webp");
+    //
+    this.categoriaSeleccionada = "MLA1323";
+    this.limiteProductos = 12;
+    this.cargarRegistrosPorCategoria();
   }
 
-  agregarRegistro(id, nombre, precio, categoria, imagen) {
-    const producto = new Producto(id, nombre, precio, categoria, imagen);
-    this.productos.push(producto);
+  async cargarRegistrosPorCategoria(categoria = this.categoriaSeleccionada) {
+    mostrarLoader();
+    this.categoriaSeleccionada = categoria;
+    this.productos = [];
+    const respuesta = await fetch(
+      `https://api.mercadolibre.com/sites/MLA/search?category=${categoria}&limit=${this.limiteProductos}&offset=2`
+    );
+    const resultado = await respuesta.json();
+    const productosML = resultado.results;
+    for (const productoML of productosML) {
+      const producto = new Producto(
+        productoML.id,
+        productoML.title,
+        productoML.price,
+        categoria,
+        productoML.thumbnail_id
+      );
+      this.productos.push(producto);
+    }
+    cargarProductos(this.productos);
+    Swal.close();
+  }
+
+  async cargarRegistrosPorNombre(palabra) {
+    mostrarLoader();
+    this.productos = [];
+    const respuesta = await fetch(
+      `https://api.mercadolibre.com/sites/MLA/search?category=${this.categoriaSeleccionada}&q=${palabra}&limit=${this.limiteProductos}&offset=0
+      `
+    );
+    const resultado = await respuesta.json();
+    const productosML = resultado.results;
+    for (const productoML of productosML) {
+      const producto = new Producto(
+        productoML.id,
+        productoML.title,
+        productoML.price,
+        this.categoriaSeleccionada,
+        productoML.thumbnail_id
+      );
+      this.productos.push(producto);
+    }
+    cargarProductos(this.productos);
+    Swal.close();
   }
 
   traerRegistros() {
@@ -32,12 +68,6 @@ class BaseDeDatos {
 
   registroPorId(id) {
     return this.productos.find((producto) => producto.id === id);
-  }
-
-  registrosPorNombre(palabra) {
-    return this.productos.filter((producto) =>
-      producto.nombre.toLowerCase().includes(palabra.toLowerCase())
-    );
   }
 }
 
@@ -76,6 +106,14 @@ class Carrito {
     this.listar();
   }
 
+  vaciar() {
+    this.total = 0;
+    this.cantidadProductos = 0;
+    this.carrito = [];
+    localStorage.setItem("carrito", JSON.stringify(this.carrito));
+    this.listar();
+  }
+
   listar() {
     this.total = 0;
     this.cantidadProductos = 0;
@@ -85,19 +123,25 @@ class Carrito {
         <div class="productoCarrito">
           <h2>${producto.nombre}</h2>
           <p>$${producto.precio}</p>
-          <p>Cantidad: ${producto.cantidad}</p>
+          <p>Quantity: ${producto.cantidad}</p>
           <a href="#" class="btnQuitar" data-id="${producto.id}">Remove</a>
         </div>
       `;
+
       this.total += producto.precio * producto.cantidad;
       this.cantidadProductos += producto.cantidad;
+    }
+    if (this.cantidadProductos > 0) {
+      botonComprar.style.display = "block";
+    } else {
+      botonComprar.style.display = "none";
     }
 
     const botonesQuitar = document.querySelectorAll(".btnQuitar");
     for (const boton of botonesQuitar) {
       boton.addEventListener("click", (event) => {
         event.preventDefault();
-        const idProducto = Number(boton.dataset.id);
+        const idProducto = boton.dataset.id;
         this.quitar(idProducto);
       });
     }
@@ -107,16 +151,28 @@ class Carrito {
   }
 }
 
-const bd = new BaseDeDatos();
-
 const spanCantidadProductos = document.querySelector("#cantidadProductos");
 const spanTotalCarrito = document.querySelector("#totalCarrito");
 const divProductos = document.querySelector("#productos");
 const divCarrito = document.querySelector("#carrito");
 const inputBuscar = document.querySelector("#inputBuscar");
-const botonCarrito = document.querySelector("section h1");
+const botonComprar = document.querySelector("#botonComprar");
+const botonesCategorias = document.querySelectorAll(".btnCategoria");
+const botonLogin = document.querySelector("#botonLogin");
+
+const bd = new BaseDeDatos();
 
 const carrito = new Carrito();
+
+botonesCategorias.forEach((boton) => {
+  boton.addEventListener("click", () => {
+    const categoria = boton.dataset.categoria;
+    const botonSeleccionado = document.querySelector(".seleccionado");
+    botonSeleccionado.classList.remove("seleccionado");
+    boton.classList.add("seleccionado");
+    bd.cargarRegistrosPorCategoria(categoria);
+  });
+});
 
 cargarProductos(bd.traerRegistros());
 
@@ -128,7 +184,7 @@ function cargarProductos(productos) {
         <h2>${producto.nombre}</h2>
         <p class="precio">$${producto.precio}</p>
         <div class="imagen">
-          <img src="img/${producto.imagen}" />
+          <img src="https://http2.mlstatic.com/D_604790-${producto.imagen}-V.webp" />
         </div>
         <a href="#" class="btnAgregar" data-id="${producto.id}">Add to Cart</a>
       </div>
@@ -140,20 +196,96 @@ function cargarProductos(productos) {
   for (const boton of botonesAgregar) {
     boton.addEventListener("click", (event) => {
       event.preventDefault();
-      const idProducto = Number(boton.dataset.id);
+      const idProducto = boton.dataset.id;
       const producto = bd.registroPorId(idProducto);
       carrito.agregar(producto);
+
+      Toastify({
+        text: `Item added: ${producto.nombre}`,
+        gravity: "bottom",
+        position: "center",
+        style: {
+          background: "#244ced",
+        },
+      }).showToast();
     });
   }
 }
 
-inputBuscar.addEventListener("input", (event) => {
+function mostrarLoader() {
+  Swal.fire({
+    title: "Loading",
+    html: "Please wait...",
+    timer: 1000,
+    timerProgressBar: true,
+    didOpen: () => {
+      Swal.showLoading();
+    },
+  });
+}
+
+formBuscar.addEventListener("submit", (event) => {
   event.preventDefault();
   const palabra = inputBuscar.value;
-  const productos = bd.registrosPorNombre(palabra);
-  cargarProductos(productos);
+  bd.cargarRegistrosPorNombre(palabra);
 });
 
-botonCarrito.addEventListener("click", (event) => {
-  document.querySelector("section").classList.toggle("ocultar");
+botonComprar.addEventListener("click", (event) => {
+  event.preventDefault();
+
+  Swal.fire({
+    title: "Confirm Purchase?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Yes, I'm sure",
+    cancelButtonText: "No, cancel",
+    confirmButtonColor: 'green',
+    cancelButtonColor: 'red',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      carrito.vaciar();
+      Swal.fire({
+        title: "Congratulations!",
+        icon: "success",
+        text: "Purchase Successful",
+      });
+    }
+  });
+});
+
+botonLogin.addEventListener("click", (event) => {
+  event.preventDefault();
+
+Swal.fire({
+  title: 'Submit your Username',
+  input: 'text',
+  inputAttributes: {
+    autocapitalize: 'off'
+  },
+  showCancelButton: true,
+  confirmButtonText: 'Look up',
+  showLoaderOnConfirm: true,
+  preConfirm: (login) => {
+    return fetch(`//api.github.com/users/${login}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(response.statusText)
+        }
+        return response.json()
+      })
+      .catch(error => {
+        Swal.showValidationMessage(
+          `Request failed: ${error}`
+        )
+      })
+  },
+  allowOutsideClick: () => !Swal.isLoading()
+}).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire({
+      title: `${result.value.login}'s avatar`,
+      imageUrl: result.value.avatar_url
+    })
+  }
+})
 });

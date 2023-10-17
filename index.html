@@ -3,49 +3,62 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- ==========TOASTIFY========== -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"/>
+    <!-- ==========BOOTSTRAP========== -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- ==========CSS STYLESHEET========== -->
     <link rel="stylesheet" href="styles.css" />
     <title>Tennis World</title>
   </head>
-  <body>
+  <body class="bg-dark">
     <header>
-      <nav class="nav">
-          <h2>TENNIS WORLD</h2>
+      <nav class="nav fixed-top bg-dark">
+        <div class="logo">
+          <a href="./index.html">
+              <img src="./img/logo.png" alt="logo">
+          </a>
+        </div>
           <div class="menu">
-              <ul class="main-menu">
-                  <li><a href="#">Men's Apparel</a></li>
-                  <li><a href="#">Women's Apparel</a></li>
-                  <li><a href="#">Racquets</a></li>
-                  <li><a href="#">Shoes</a></li>
+              <ul class="main-menu mb-0 p-0">
+                  <li class="btnCategoria seleccionado" data-categoria="MLA1323"><a href="#">Clothing</a></li>
+                  <li class="btnCategoria" data-categoria="MLA12209"><a href="#">Strings</a></li>
+                  <li class="btnCategoria" data-categoria="MLA438308"><a href="#">Equipment</a></li>
+                  <li class="btnCategoria" data-categoria="MLA1325"><a href="#">Accessories</a></li>
               </ul>
           </div>
           <div class="get-started">
-              <button class="btn-sec-s">Sign In</button>
-              <button class="btn-main-s">Register</button>
+              <button class="btnLogin" id="botonLogin">Sign in</button>
+              <button class="btnCarrito" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i class="bi bi-cart"></i>
+              <span id="cantidadProductos" class="position-absolute ms-3 translate-middle badge rounded-pill bg-danger"> 1 </span></button>
           </div>
       </nav>
   </header>
-    <main>
-      <input id="inputBuscar" type="text" placeholder="Search..." />
-      <div>
-        <h2 class="intro-text">
-        New Arrivals!
-        </h2>
-      </div>
-      <div id="productos">
-      </div>
-    </main>
 
-    <section class="ocultar">
-      <h1>
-        <span id="cantidadProductos">0</span>
-      </h1>
-      <div id="scroll">
-        <div id="carrito">
-        </div>
+  <main>
+    <form id="formBuscar">
+      <input id="inputBuscar" type="text" placeholder="Search..." />
+    </form>
+
+    <div class="offcanvas offcanvas-end text-bg-dark" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">In Your Cart</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
-      <h2>Total $<span id="totalCarrito">0</span></h2>
-    </section>
+      <div class="offcanvas-body">
+        
+        <div id="carrito"></div>
+
+          <h2>Total: $<span id="totalCarrito">0</span></h2>
+          <a href="#" id="botonComprar" class="boton" style="width: 100%; text-align: center">Comprar</a>
+
+      </div>
+    </div>
+
+    <div id="productos"></div>
+
+  </main>
 
     <footer>
       <div class="container-social-media">
@@ -63,8 +76,14 @@
           <h5>COPYRIGHT® All Rights Reserved</h5>
       </div>
   </footer>
-    <script src="app.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+      <!-- ==========SCRIPT BOOTSTRAP========== -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+      <!-- ==========SCRIPT SWEET ALERT========== -->
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <!-- ==========SCRIPT TOASTIFY========== -->
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+      <!-- ==========JAVASCRIPT========== -->
+      <script src="app.js"></script>
   </body>
   
 </html>

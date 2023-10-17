@@ -3,158 +3,142 @@
 * {
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
-}
-
-/* NAVBAR */
-.nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 100%;
-  height: 4rem;
-  border-bottom: solid 1px #ddd;
-}
-.nav h2 {
-  font-family: "Montserrat", sans-serif;
-  font-size: 2rem;
-  color: white;
-  text-decoration: none;
-}
-.main-menu {
-  margin-bottom: 0;
-}
-.main-menu li {
-  font-size: 1rem;
-  list-style: none;
-  display: inline;
-  margin-right: 2rem;
-}
-.main-menu li a {
-  color: white;
-  text-decoration: none;
-}
-.main-menu li a:hover {
-  text-decoration: underline;
-}
-
-/* BOTONES NAVBAR*/
-.btn-main, .btn-main-s {
-  padding: 0.25rem 1.5rem;
-  border-radius: 0.25rem;
-  background-color: #0075FF;
-  color: white;
-  border: solid 1px #0075FF;
-}
-.btn-main:hover, .btn-main-s:hover {
-  background-color: white;
-  color: #0075FF;
-}
-.btn-main-s {
-  font-size: 1rem;
-  padding: 0.1rem 1rem;
-}
-.btn-sec, .btn-sec-s {
-  padding: 0.25rem 1.5rem;
-  border-radius: 0.25rem;
-  color: white;
-  background-color: transparent;
-  border: none;
-}
-.btn-sec:hover, .btn-sec-s:hover {
-  color: #888;
-}
-.btn-sec-s {
-  font-size: 1rem;
-  padding: 0.1rem 1rem;
-}
-
-/*SECCION PRODUCTOS*/
-.intro-text{
-  font-family: "Montserrat", sans-serif;
-  font-size: 1.8rem;
-  color: white;
-  padding: 1.2rem;
 }
 body {
   font-family: "Montserrat", sans-serif;
-  background-color: #272727;
-  background-image: url(./img/background-image.jpg);
-  background-position: initial;
-  background-size: cover;
 }
+
+/*SECCION SOCIAL MEDIA*/
+
+.container-social-media {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  gap: 1.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.container-social-media .img-logo {
+  height: 1.8rem;
+}
+.container-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
+}
+.container-footer h5 {
+  color: #CCC9DC;
+  font-size: 0.8rem;
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* NAVBAR */
+
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-around;
+  width: 100vw;
+  min-height: 8rem;
+  overflow-x: hidden;
+}
+.nav .logo img {
+  width: 8rem;
+}
+.nav .main-menu li {
+  font-size: 1.2rem;
+  list-style: none;
+  display: inline;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.nav .main-menu a {
+  color: white;
+  text-decoration: none;
+  font-family: "Montserrat", sans-serif;
+}
+.nav .main-menu a:hover {
+  color: grey;
+}
+
+/* BOTONES NAVBAR*/
+
+.btnLogin, .btnCarrito {
+  padding: 0.25rem 1.5rem;
+  border-radius: 0.25rem;
+  background-color: #244ced;
+  color: white;
+  border: solid 1px #244ced;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2rem;
+  padding: 0.1rem 1rem;
+  margin-left: 1rem;
+}
+.btnLogin:hover, .btnCarrito:hover {
+  background-color: white;
+  color: #0075FF;
+}
+.buscador {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 8rem;
+}
+input {
+  width: 50%;
+  font-size: 1.2rem;
+  border-radius: 10px;
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+/* SECCION CARRITO*/
+
 main {
-  width: 60%;
+  width: 80%;
   margin: auto;
   padding: 20px 0 0 0;
+  margin-bottom: 2rem;
 }
-main input {
-  width: 50%;
-  padding: 12px;
-  font-size: 1.4rem;
-  box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.05);
-  border-radius: 10px;
-  border: 1px solid black;
-  font-weight: 100;
-  margin-bottom: 20px;
-}
-section {
-  position: fixed;
-  box-shadow: -6px -2px 25px -13px rgba(0, 0, 0, 0.15);
-  width: 340px;
-  height: 100%;
-  top: 0;
-  right: 0;
-  padding: 30px;
-  transition: all 0.2s;
-  background-color: white;
-}
-section h1 {
-  position: absolute;
-  top: 80px;
-  right: 360px;
-  display: block;
-  width: 50px;
-  height: 50px;
-  border-radius: 10px;
-  cursor: pointer;
-  color: white;
-  box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.2);
-  background: url("img/carrito.png") no-repeat #0075FF;
-  background-size: 60%;
-  background-position: 9px center;
-}
-section h1 span {
-  display: block;
-  background-color: red;
-  border-radius: 150px;
-  padding: 5px;
-  width: 30px;
-  text-align: center;
-  font-size: 14px;
-  margin: -10px 0 0 30px;
-}
-section h3 {
-  padding-top: 10px;
-  text-align: center;
-  font-size: 30px;
+section h2 {
+  font-size: 2rem;
 }
 .btnAgregar,
-.btnQuitar {
+.btnQuitar,
+.boton {
   color: white;
-  background-color: #0075FF;
+  background-color: #244ced;
   text-decoration: none;
   display: inline-block;
   padding: 10px;
   border-radius: 10px;
   margin: 10px 0;
-  border: 1px solid #0075FF;
+  border: 1px solid #244ced;
   transition: all 0.2s;
+  cursor: pointer;
 }
 .btnAgregar:hover,
-.btnQuitar:hover {
+.btnQuitar:hover,
+.boton:hover {
   border: 1px solid white;
   scale: 1.05;
+}
+.producto h2 {
+  font-size: 1.5rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .productoCarrito {
   border-bottom: 2px dashed rgba(0, 0, 0, 0.2);
@@ -162,12 +146,12 @@ section h3 {
   margin-bottom: 10px;
   line-height: 24px;
 }
-.producto h2 {
-  font-size: 1.5rem;
-}
 .productoCarrito h2 {
   margin-bottom: 8px;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .ocultar {
   right: -340px;
@@ -175,10 +159,11 @@ section h3 {
 }
 #productos {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 40px;
+  grid-row-gap: 40px;
   height: auto;
+  padding-top: 2rem;
 }
 .producto {
   border: 1px solid rgba(0, 0, 0, 0.4);
@@ -189,8 +174,8 @@ section h3 {
 }
 .producto .precio {
   padding: 10px 0;
-  font-size: 1.2rem;
-  background-color: #272727;
+  font-size: 20px;
+  background-color: gray;
   display: inline-block;
   padding: 4px 10px;
   color: white;
@@ -204,9 +189,10 @@ section h3 {
   margin: 20px 0;
 }
 .producto .imagen img {
-  max-height: 160px;
+  max-height: 200px;
 }
-.producto .btnAgregar {
+.producto .btnAgregar,
+.producto .boton {
   margin: auto;
   display: block;
   text-align: center;
@@ -215,38 +201,9 @@ section h3 {
   border: 1px solid black;
   box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.2);
 }
-#scroll {
-  max-height: 96%;
-  overflow-y: auto;
-  padding-left: 5px;
-}
-
-/*SECCION SOCIAL MEDIA*/
-.container-social-media {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #272727;
-  width: 100vw;
-  gap: 1.5rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-.container-social-media .img-logo {
-  height: 1.8rem;
-}
-.container-footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #272727;
-  width: 100vw;
-  padding-top: 0.5rem;
-  padding-bottom: 1rem;
-}
-.container-footer h5 {
-  color: #CCC9DC;
-  font-size: 0.8rem;
-  margin: 0;
-  font-family: "Montserrat", sans-serif;
+.producto h2 {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 350px;
 }
