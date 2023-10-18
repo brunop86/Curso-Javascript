@@ -3,6 +3,7 @@
 * {
   padding: 0;
   margin: 0;
+  overflow-x: hidden;
 }
 body {
   font-family: "Montserrat", sans-serif;
@@ -34,7 +35,6 @@ body {
   color: #CCC9DC;
   font-size: 0.8rem;
   margin: 0;
-  font-family: "Montserrat", sans-serif;
 }
 
 /* NAVBAR */
@@ -46,7 +46,6 @@ body {
   justify-content: space-around;
   width: 100vw;
   min-height: 8rem;
-  overflow-x: hidden;
 }
 .nav .logo img {
   width: 8rem;
@@ -61,7 +60,6 @@ body {
 .nav .main-menu a {
   color: white;
   text-decoration: none;
-  font-family: "Montserrat", sans-serif;
 }
 .nav .main-menu a:hover {
   color: grey;
@@ -75,7 +73,6 @@ body {
   background-color: #244ced;
   color: white;
   border: solid 1px #244ced;
-  font-family: "Montserrat", sans-serif;
   font-size: 1.2rem;
   padding: 0.1rem 1rem;
   margin-left: 1rem;
@@ -206,4 +203,32 @@ section h2 {
   white-space: nowrap;
   overflow: hidden;
   width: 350px;
+}
+
+@media (max-width: 768px) {
+  .main-menu {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 0;
+  }
+  .btnLogin, .btnCarrito {
+    padding: 0.25rem 1.5rem;
+    border-radius: 0.25rem;
+    margin: 1rem;
+  }
+  input {
+    width: 100%;
+    margin-top: 3rem;
+  }
+  #productos {
+    display: flex;
+    flex-direction: column;
+  }
+  .producto h2 {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 280px;
+  }
 }
