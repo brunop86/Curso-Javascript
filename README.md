@@ -1,6 +1,6 @@
 # Tennis World
 
-https://brunop86.github.io/brunoPacheJavascript47050/
+https://brunop86.github.io/Tennis-World/
 
 Bienvenido a Tennis World nuestra plataforma de comercio electrónico creada con HTML, CSS5, Bootstrap y JavaScript. Estamos emocionados de que estés aquí y te proporcionaremos información clave para navegar de manera óptima por nuestra tienda en línea.
 
